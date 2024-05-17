@@ -7,11 +7,16 @@ function TodoForm() {
 
   const add = (e) => {
     e.preventDefault();
-
     if (!todo) return;
 
-    addTodo({ todo, completed: false });
-    setTodo("");
+    // old syntax but clearer,
+    // BTW todo 'here' is the textContent of a todo
+    addTodo({ todo: todo, completed: false });
+
+    // new syntax but tougher
+    // addTodo({ todo, completed: false });
+
+    setTodo(""); //clear the input field
   };
 
   return (

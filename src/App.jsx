@@ -7,27 +7,62 @@ import TodoItem from "./components/TodoItem";
 function App() {
   const [todos, setTodos] = useState([]);
 
+  // Function to add a new todo item
   const addTodo = (todo) => {
-    setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
-  };
-
-  const updateTodo = (id, todo) => {
+    // Update the state using the setTodos function
     setTodos((prev) =>
-      prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo))
+      // Return a new array with the new todo item at the beginning
+      [
+        // Create a new todo item with a unique ID using Date.now() and spread the properties of the given todo
+        { id: Date.now(), ...todo },
+        // Spread the previous state (prev), which is an array of todo items, to include them in the new array
+        ...prev,
+      ]
     );
   };
 
-  const deleteTodo = (id) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  // Function to update a specific todo item by its ID
+  const updateTodo = (idOfTodoToBeUpdated, todo) => {
+    // Update the state using the setTodos function
+    setTodos((prev) =>
+      // Map over the previous state (prev), which is an array of todo items
+      prev.map((prevTodo) =>
+        // Check if the current todo item's ID matches the given ID
+        prevTodo.id === idOfTodoToBeUpdated
+          ? // If it matches, replace the current todo item with the new todo item
+            todo
+          : // If it doesn't match, keep the current todo item as is
+            prevTodo
+      )
+    );
   };
 
-  const toggleComplete = (id) => {
-    //console.log(id);
+  // Function to delete a specific todo item by its ID
+  const deleteTodo = (idOfTodoToBeDeleted) => {
+    // Update the state using the setTodos function
     setTodos((prev) =>
+      // Filter the previous state (prev), which is an array of todo items
+      prev.filter(
+        (todo) =>
+          // Keep only the todo items whose ID does not match the given ID
+          todo.id !== idOfTodoToBeDeleted
+      )
+    );
+  };
+
+  // Function to toggle the 'completed' status of a specific todo item by its ID
+  const toggleComplete = (idOfTodoToBeToggled) => {
+    // Update the state using the setTodos function
+    setTodos((prev) =>
+      // Map over the previous state (prev), which is an array of todo items
       prev.map((prevTodo) =>
-        prevTodo.id === id
-          ? { ...prevTodo, completed: !prevTodo.completed }
-          : prevTodo
+        // Check if the current todo item's ID matches the given ID
+        prevTodo.id === idOfTodoToBeToggled
+          ? // If it matches, create a new object with the same properties as the current todo item
+            // but toggle the 'completed' status
+            { ...prevTodo, completed: !prevTodo.completed }
+          : // If it doesn't match, keep the current todo item as is
+            prevTodo
       )
     );
   };
