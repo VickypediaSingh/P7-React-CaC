@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import { useTodo } from "../contexts/TodoContext";
 
 function TodoForm() {
-  const [todo, setTodo] = useState("");
+  const [todoName, setTodoName] = useState("");
   const { addTodo } = useTodo();
 
   const add = (e) => {
     e.preventDefault();
-    if (!todo) return;
+    if (!todoName) return;
 
     // old syntax but clearer,
     // BTW todo 'here' is the textContent of a todo
-    addTodo({ todo: todo, completed: false });
+    addTodo({ todoName: todoName, completed: false });
 
     // new syntax but tougher
     // addTodo({ todo, completed: false });
 
-    setTodo(""); //clear the input field
+    setTodoName(""); //clear the input field
   };
 
   return (
@@ -25,8 +25,8 @@ function TodoForm() {
         type="text"
         placeholder="Enter task here..."
         className="w-full border border-black/10 rounded-l-lg px-3 outline-none duration-150 bg-white/20 py-1.5"
-        value={todo}
-        onChange={(e) => setTodo(e.target.value)}
+        value={todoName}
+        onChange={(e) => setTodoName(e.target.value)}
       />
       <button
         type="submit"

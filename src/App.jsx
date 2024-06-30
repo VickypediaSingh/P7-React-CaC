@@ -22,7 +22,7 @@ function App() {
   };
 
   // Function to update a specific todo item by its ID
-  const updateTodo = (idOfTodoToBeUpdated, todo) => {
+  const updateTodo = (idOfTodoToBeUpdated, incomingTodo) => {
     // Update the state using the setTodos function
     setTodos((prev) =>
       // Map over the previous state (prev), which is an array of todo items
@@ -30,7 +30,7 @@ function App() {
         // Check if the current todo item's ID matches the given ID
         prevTodo.id === idOfTodoToBeUpdated
           ? // If it matches, replace the current todo item with the new todo item
-            todo
+            incomingTodo
           : // If it doesn't match, keep the current todo item as is
             prevTodo
       )
